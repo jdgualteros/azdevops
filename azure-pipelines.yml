@@ -7,8 +7,7 @@
 trigger:
 - main
 
-pool:
-name: personal
+pool: personal
 
 steps:
 - script: echo Hello, world!
