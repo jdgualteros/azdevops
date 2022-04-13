@@ -10,5 +10,5 @@ trigger:
 pool: personal
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: Inicio!
+  displayName: 'Inicion pepiline'
