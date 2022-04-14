@@ -9,6 +9,12 @@ trigger:
 
 pool: personal
 
-steps:
-- script: echo Inicio!
-  displayName: 'Inicion pepiline'
+jobs:
+- job: A
+  steps:
+  - script: echo Inicio!
+    displayName: 'Inicion pepiline'
+- job: B
+  steps:
+    - script: echo "Segundo job"
+      displayName: 'segundo job'
