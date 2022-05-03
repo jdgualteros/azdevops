@@ -9,12 +9,10 @@ trigger:
 
 pool: personal
 
-jobs:
-- job: A
-  steps:
-  - script: echo Inicio!
-    displayName: 'Inicion pepiline'
-- job: B
-  steps:
-    - script: echo "Segundo job"
-      displayName: 'segundo job'
+steps:
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerHub'
+    command: 'start'
+    container: 'maven'
