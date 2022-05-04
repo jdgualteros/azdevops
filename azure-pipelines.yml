@@ -1,18 +1,28 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+version: '3.8'
+services:
 
+  jenkins:
+    container_name: jenkins
+    hostname: jenkins
+    image: jenkins:1.0
+    restart: unless-stopped
+    user: root
+    networks:
+      - devops-net
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
 
-trigger:
-- main
+networks:
+  devops-net:
+    name: devops-net
 
-pool: personal
-
-steps:
-
-- task: Docker@2
-  inputs:
-    containerRegistry: 'dockerHub'
-    command: 'start'
-    container: 'maven'
+volumes:
+  data:
+    name: jenkins-data
+  maven:
+    name: maven
+    external: true
