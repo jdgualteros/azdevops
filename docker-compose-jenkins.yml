@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+
+  jenkins:
+    container_name: jenkins
+    hostname: jenkins
+    image: jenkins:1.0
+    restart: unless-stopped
+    user: root
+    networks:
+      - devops-net
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  devops-net:
+    name: devops-net
+
+volumes:
+  data:
+    name: jenkins-data
+  maven:
+    name: maven
+    external: true
