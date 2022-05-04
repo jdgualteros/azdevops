@@ -1,28 +1,15 @@
-version: '3.8'
-services:
 
-  jenkins:
-    container_name: jenkins
-    hostname: jenkins
-    image: jenkins:1.0
-    restart: unless-stopped
-    user: root
-    networks:
-      - devops-net
-    ports:
-      - 8080:8080
-      - 50000:50000
-    volumes:
-      - data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+trigger:
+- azure-pipelines
 
-networks:
-  devops-net:
-    name: devops-net
+pool: personal
 
-volumes:
-  data:
-    name: jenkins-data
-  maven:
-    name: maven
-    external: true
+steps:
+
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    azureSubscription: 'Azure for Students(3dfa5484-e471-4491-80c3-dd5aec29ab6b)'
+    azureContainerRegistry: '{"loginServer":"registrylearndata.azurecr.io", "id" : "/subscriptions/3dfa5484-e471-4491-80c3-dd5aec29ab6b/resourceGroups/LearnData/providers/Microsoft.ContainerRegistry/registries/RegistryLearnData"}'
+    dockerComposeFile: 'docker-compose-jenkins.yml'
+    action: 'Run a Docker Compose command'
