@@ -6,10 +6,10 @@ pool: personal
 
 steps:
 
-- task: DockerCompose@0
+- task: Maven@3
+  displayName: 'Maven pom.xml'
   inputs:
-    containerregistrytype: 'Azure Container Registry'
-    azureSubscription: 'Azure for Students(3dfa5484-e471-4491-80c3-dd5aec29ab6b)'
-    azureContainerRegistry: '{"loginServer":"registrylearndata.azurecr.io", "id" : "/subscriptions/3dfa5484-e471-4491-80c3-dd5aec29ab6b/resourceGroups/LearnData/providers/Microsoft.ContainerRegistry/registries/RegistryLearnData"}'
-    dockerComposeFile: 'docker-compose-jenkins.yml'
-    action: 'Run a Docker Compose command'
+    options: '-DskipITs --settings ./maven/settings.xml'
+    publishJUnitResults: false
+    codeCoverageToolOption: JaCoCo
+    codeCoverageSourceDirectories: src/main
