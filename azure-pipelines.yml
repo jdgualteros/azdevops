@@ -9,7 +9,8 @@ steps:
 - task: Maven@3
   displayName: 'Maven pom.xml'
   inputs:
+    mavenPomFile: 'pom.xml'
     options: '-DskipITs --settings ./maven/settings.xml'
     publishJUnitResults: false
     codeCoverageToolOption: JaCoCo
-    codeCoverageSourceDirectories: src/main
+
